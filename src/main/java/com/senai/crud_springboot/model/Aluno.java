@@ -1,22 +1,30 @@
 package com.senai.crud_springboot.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
+    @NotBlank(message = "O nome do produto não pode estar vazio")
+    @Column(nullable = false, length = 100)
     private String nome;
-    private int CPF;
+    @NotBlank(message = "O CPF não pode estar vazio")
+    @Column(nullable = false, length = 11)
+    private String CPF;
+
     private String IdAcesso;
+    @NotBlank(message = "O email não pode estar vazio")
+    @Column(nullable = false, length = 60)
     private String email;
     private String curso;
 
-    public Aluno(String id, String nome, int CPF, String idAcesso, String email, String curso) {
+
+    public Aluno(String id, String nome, String CPF, String idAcesso, String email, String curso) {
         this.id = id;
         this.nome = nome;
         this.CPF = CPF;
@@ -41,11 +49,11 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public int getCPF() {
+    public String getCPF() {
         return CPF;
     }
 
-    public void setCPF(int CPF) {
+    public void setCPF(String CPF) {
         this.CPF = CPF;
     }
 
